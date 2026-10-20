@@ -5,6 +5,8 @@ server:
 
 spring:
   jpa:
+    hibernate:
+      ddl-auto: update # Permite crear/actualizar la estructura automáticamente en prod
     show-sql: false
     properties:
       hibernate:

@@ -1,60 +1,60 @@
-server:
-  port: 8080
-  servlet:
-    context-path: /api/v1 # Opsyonal: ngato / prefijo iti amin a ruta ti API
+  server:
+    port: 8080
+    servlet:
+      context-path: /api/v1 # Opsyonal: ngato / prefijo iti amin a ruta ti API
 
-spring:
-  application:
-    name: api # Naggan ti aplikasionmo
+  spring:
+    application:
+      name: api # Naggan ti aplikasionmo
 
-  # Konfigurasion ti Database (PostgreSQL)
-  datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:api_db}
-    username: ${DB_USER:postgres}
-    password: ${DB_PASS:postgres}
-    driver-class-name: org.postgresql.Driver
+    # Konfigurasion ti Database (PostgreSQL)
+    datasource:
+      url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:api_db}
+      username: ${DB_USER:postgres}
+      password: ${DB_PASS:postgres}
+      driver-class-name: org.postgresql.Driver
 
-  # Konfigurasion ti JPA / Hibernate
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: update # Opsyonal: update, validate, or create-drop
-    show-sql: true
-    properties:
+    # Konfigurasion ti JPA / Hibernate
+    jpa:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
       hibernate:
-        format_sql: true # Para nalaka a mabasa ti SQL queries iti consola
-        use_sql_comments: true
+        ddl-auto: update # Opsyonal: update, validate, or create-drop
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true # Para nalaka a mabasa ti SQL queries iti consola
+          use_sql_comments: true
 
-  # Konfigurasion ti DevTools
-  devtools:
-    restart:
-      enabled: true
-    livereload:
-      enabled: true
-
-# Logging
-logging:
-  level:
-    root: INFO
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-
-# Actuator (salud para Docker/Coolify)
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health
-  endpoint:
-    health:
-      probes:
+    # Konfigurasion ti DevTools
+    devtools:
+      restart:
+        enabled: true
+      livereload:
         enabled: true
 
-# Springdoc / Swagger UI
-springdoc:
-  api-docs:
-    path: /v3/api-docs
-  swagger-ui:
-    path: /swagger-ui.html
-    tags-sorter: alpha
-    operations-sorter: alpha
+  # Logging
+  logging:
+    level:
+      root: INFO
+      org.hibernate.SQL: DEBUG
+      org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+  # Actuator (salud para Docker/Coolify)
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health
+    endpoint:
+      health:
+        probes:
+          enabled: true
+
+  # Springdoc / Swagger UI
+  springdoc:
+    api-docs:
+      path: /v3/api-docs
+    swagger-ui:
+      path: /swagger-ui.html
+      tags-sorter: alpha
+      operations-sorter: alpha
