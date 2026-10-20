@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import com.api.api.exception.DestinationNotFoundException;
+import com.api.api.exception.CategoryNotFoundException;
 import com.api.api.exception.SlugAlreadyExistsException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
-    @ExceptionHandler(DestinationNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleNotFound(DestinationNotFoundException ex) {
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleCategoryNotFound(CategoryNotFoundException ex) {
         return build(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 

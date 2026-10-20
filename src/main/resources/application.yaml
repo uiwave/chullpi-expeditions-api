@@ -39,6 +39,17 @@ logging:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
+# Actuator (salud para Docker/Coolify)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
 # Springdoc / Swagger UI
 springdoc:
   api-docs:

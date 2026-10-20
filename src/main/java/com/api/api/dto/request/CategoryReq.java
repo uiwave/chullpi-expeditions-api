@@ -12,12 +12,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DestinationReq {
-    @NotBlank(message = "El nombre del destino es obligatorio")
+public class CategoryReq {
+    @NotBlank(message = "El nombre de la categoría es obligatorio")
     @Size(max = 150, message = "El nombre no debe superar los 150 caracteres")
     private String name;
 
-    @NotBlank(message = "El slug del destino es obligatorio")
+    @NotBlank(message = "El slug de la categoría es obligatorio")
     @Size(max = 180, message = "El slug no debe superar los 180 caracteres")
     private String slug;
 }
