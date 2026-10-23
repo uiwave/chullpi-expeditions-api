@@ -1,0 +1,32 @@
+server:
+  port: 0
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+
+  flyway:
+    enabled: false
+
+jwt:
+  secret: test-secret-key-with-at-least-32-bytes-long
+  expiration-minutes: 60
+  issuer: chullpi-expeditions-api-test
+
+google:
+  client-id: test-client-id
+
+app:
+  cors:
+    allowed-origins: http://localhost:4200
+  admin:
+    email: admin@test.com
+    password: Admin123!

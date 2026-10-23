@@ -8,26 +8,68 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import com.api.api.exception.CategoryNotFoundException;
-import com.api.api.exception.SlugAlreadyExistsException;
+import com.api.api.exception.GoogleTokenInvalidoException;
+import com.api.api.exception.OperacionNoPermitidaException;
+import com.api.api.exception.PagoInsuficienteException;
+import com.api.api.exception.RecursoNotFoundException;
+import com.api.api.exception.RegistroDuplicadoException;
+import com.api.api.exception.SolicitudInvalidaException;
+import com.api.api.exception.StockInsuficienteException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
-    @ExceptionHandler(CategoryNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleCategoryNotFound(CategoryNotFoundException ex) {
+    @ExceptionHandler(GoogleTokenInvalidoException.class)
+    public ResponseEntity<Map<String, Object>> handleGoogleToken(GoogleTokenInvalidoException ex) {
+        return build(HttpStatus.UNAUTHORIZED, ex.getMessage());
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<Map<String, Object>> handleBadCredentials(BadCredentialsException ex) {
+        return build(HttpStatus.UNAUTHORIZED, "Credenciales inválidas");
+    }
+
+    @ExceptionHandler(DisabledException.class)
+    public ResponseEntity<Map<String, Object>> handleDisabled(DisabledException ex) {
+        return build(HttpStatus.FORBIDDEN, "El usuario está deshabilitado");
+    }
+
+    @ExceptionHandler(RecursoNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleRecursoNotFound(RecursoNotFoundException ex) {
         return build(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
-    @ExceptionHandler(SlugAlreadyExistsException.class)
-    public ResponseEntity<Map<String, Object>> handleSlugAlreadyExists(SlugAlreadyExistsException ex) {
+    @ExceptionHandler(RegistroDuplicadoException.class)
+    public ResponseEntity<Map<String, Object>> handleRegistroDuplicado(RegistroDuplicadoException ex) {
         return build(HttpStatus.CONFLICT, ex.getMessage());
+    }
+
+    @ExceptionHandler(OperacionNoPermitidaException.class)
+    public ResponseEntity<Map<String, Object>> handleOperacionNoPermitida(OperacionNoPermitidaException ex) {
+        return build(HttpStatus.CONFLICT, ex.getMessage());
+    }
+
+    @ExceptionHandler(StockInsuficienteException.class)
+    public ResponseEntity<Map<String, Object>> handleStockInsuficiente(StockInsuficienteException ex) {
+        return build(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(PagoInsuficienteException.class)
+    public ResponseEntity<Map<String, Object>> handlePagoInsuficiente(PagoInsuficienteException ex) {
+        return build(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(SolicitudInvalidaException.class)
+    public ResponseEntity<Map<String, Object>> handleSolicitudInvalida(SolicitudInvalidaException ex) {
+        return build(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
